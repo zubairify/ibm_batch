@@ -2,3 +2,5 @@ Hello World!
 Welcome to GIT.
 
 This is a change.
+
+Another change to the file.
