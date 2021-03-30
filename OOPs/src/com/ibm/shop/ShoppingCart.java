@@ -1,30 +1,34 @@
 package com.ibm.shop;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class ShoppingCart {
 	private double cartTotal;
-	private Product[] items;
-	private int idx;
+	private ArrayList<Product> items;	// replace it with ArrayList<Product>
+	// Replace this with a HashMap<String, Double>
+	private HashMap<String, Double> coupons;
 	
-	String[][] coupons = {{"HOLI200","200"},{"WKND100", "100"}, {"APRIL150","150"}};
 	public ShoppingCart() {
-		items = new Product[5];
+		items = new ArrayList<Product>();
+		coupons = new HashMap<String, Double>();
+		coupons.put("HOLI200",200.0);
+		coupons.put("WKND100",100.0);
+		coupons.put("APRIL150",150.0);
 	}
 	
 	public void addProduct(Product p) throws OutOfStockException {
-		if(idx < items.length) {
-			items[idx ++] = p;
-			cartTotal += p.getPrice();
-		} else
-			System.out.println("Your cart is full");
+		items.add(p);
+		cartTotal += p.getPrice();
 	}
 	
 	public void checkout(Payment pmt, String code) {
-		if(idx == 0) 
+		if(items.size() == 0) 
 			System.out.println("Your cart is empty!!");
 		else {
 			System.out.println("Products in your cart");
-			for (int i = 0; i < idx; i++) 
-				System.out.println(items[i].getName() + ": " + items[i].getPrice());
+			for (Product p : items) 
+				System.out.println(p.getName() + ": " + p.getPrice());
 			System.out.println("Cart Total: " + cartTotal);
 		}
 	}

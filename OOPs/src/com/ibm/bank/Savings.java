@@ -13,7 +13,7 @@ public class Savings extends Account {
 	public void withdraw(double amount) throws BalanceException {
 		if(amount <= (balance - MIN_SAV_BAL)) {
 			balance -= amount;
-			txns[idx ++] = new Transaction("DR", amount, balance);
+			txns.add(new Transaction("DR", amount, balance));
 		} else
 			throw new BalanceException("Insufficient balance");
 	}

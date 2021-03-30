@@ -1,5 +1,7 @@
 package com.ibm.bank;
 
+import java.util.Vector;
+
 /**
  * This class represents generalised banking account.
  * @author Zubair Shaikh
@@ -19,8 +21,7 @@ public abstract class Account implements Banking {
 	
 	private static int autogen = INIT_ACNT_NO;
 	
-	protected Transaction[] txns;
-	protected int idx;
+	protected Vector<Transaction> txns;
 	
 	/* This is default constructor */
 	public Account() {
@@ -32,8 +33,8 @@ public abstract class Account implements Banking {
 		this.holder = holder;
 		this.balance = balance;
 		
-		txns = new Transaction[10];
-		txns[idx ++] = new Transaction("OB", balance, balance);
+		txns = new Vector<Transaction>();
+		txns.add(new Transaction("OB", balance, balance));
 	}
 	
 	public void summary() {
@@ -45,14 +46,14 @@ public abstract class Account implements Banking {
 	// BL(Business Logic) methods
 	public void deposit(double amount) {
 		balance += amount;
-		txns[idx ++] = new Transaction("CR", amount, balance);
+		txns.add(new Transaction("CR", amount, balance));
 	}
 	
 	public abstract void withdraw(double amount) throws BalanceException; 
 
 	public void statement() {
 		System.out.println("Statment for A/C: " + acntNo);
-		for (int i = 0; i < idx; i++) 
-			txns[i].print();
+		for (Transaction t : txns) 
+			t.print();
 	}
 }
