@@ -9,10 +9,11 @@ public class SyncDemo implements Runnable {
 
 	Object dummy = new Object();
 	
-	private void print(String name) {
-		System.out.println(name + " has entered the print method");
+	private synchronized void print(String name) {	// synchronised method - locks current object by default
+//		System.out.println(name + " has entered the print method");
 		
-		synchronized (dummy) {
+//		synchronized (dummy) {	// synchronised block - locking dummy object
+//		synchronized (this) {	// synchronised block - locking this object
 			try {
 				System.out.print("[");
 				Thread.sleep(1000);
@@ -22,7 +23,7 @@ public class SyncDemo implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		}
+//		}
 	}
 
 	public static void main(String[] args) {
