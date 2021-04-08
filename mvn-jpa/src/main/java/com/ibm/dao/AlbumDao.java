@@ -16,6 +16,7 @@ public class AlbumDao {
 	
 	public int saveAlbum(Album a) {
 		EntityManager em = factory.createEntityManager();
+		// Transaction is mandatory to perform DML operations
 		EntityTransaction txn = em.getTransaction();
 		txn.begin();
 		em.persist(a);
@@ -27,6 +28,17 @@ public class AlbumDao {
 	public Album findAlbum(int id) {
 		EntityManager em = factory.createEntityManager();
 		Album a = em.find(Album.class, id);
+		return a;
+	}
+	
+	public Album updateAlbum(Album a) {
+		EntityManager em = factory.createEntityManager();
+		EntityTransaction txn = em.getTransaction();
+		txn.begin();
+		
+		em.merge(a);
+		txn.commit();
+		em.close();
 		return a;
 	}
 }

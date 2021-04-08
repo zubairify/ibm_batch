@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "music_album")
+@Table(name = "music_album2")
 public class Album {
 	@Id
 	@GeneratedValue
@@ -46,5 +46,10 @@ public class Album {
 	}
 	public void setRating(double rating) {
 		this.rating = rating;
+	}
+	
+	@Override
+	public String toString() {
+		return "Album [albumId=" + albumId + ", title=" + title + ", genre=" + genre + ", rating=" + rating + "]";
 	}
 }
